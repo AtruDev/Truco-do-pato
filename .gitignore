@@ -1,0 +1,8 @@
+# arquivos gerados pela compilação
+*.o
+*.d
+*.exe
+bar_do_pato
+
+# enunciado do professor (não publicar)
+Projeto-AED-*.pdf
