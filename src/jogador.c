@@ -1,6 +1,6 @@
 /*
  * jogador.c — Módulo 1: Jogadores, duplas e mesa
- * Responsável: Lucas
+ * Responsável: Lucca
  *
  * Cada Jogador carrega junto tudo o que é dele: nome, cartas na mão
  * e um ponteiro para a própria dupla. A Dupla aponta de volta para os

@@ -15,7 +15,7 @@ Makefile
 
 | # | Módulo | Arquivos | Responsável | Conteúdo |
 |---|--------|----------|-------------|----------|
-| 1 | Jogadores | `jogador.h` / `jogador.c` | Lucas | `Jogador`, `Dupla`, `Mesa`; `cadastrar_jogador`, `criar_dupla`, `montar_mesa` |
+| 1 | Jogadores | `jogador.h` / `jogador.c` | Lucca | `Jogador`, `Dupla`, `Mesa`; `cadastrar_jogador`, `criar_dupla`, `montar_mesa` |
 | 2 | Baralho | `baralho.h` / `baralho.c` | Rafael | `Carta`, `Baralho` (pilha, opaco); `criar_baralho`, `embaralhar` (Fisher-Yates), `puxar_do_topo`, `liberar_baralho` |
 | 3 | Manilha | `manilha.h` / `manilha.c` | Pedro | `revelar_vira`, `calcular_manilha`, `forca_da_carta` |
 | 4 | Fila de turnos | `fila_turno.h` / `fila_turno.c` | Joao | `FilaTurno` (fila, opaca); `criar_fila`, `proximo_jogador`, `jogador_passou`, `girar_mao`, `liberar_fila` |

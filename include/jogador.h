@@ -1,6 +1,6 @@
 /*
  * jogador.h — Módulo 1: Jogadores, duplas e mesa
- * Responsável: Lucas
+ * Responsável: Lucca
  *
  * Define o jogador (nome + mão de cartas), a dupla (dois parceiros)
  * e a mesa (4 posições com as duplas alternadas: A1, B1, A2, B2).
