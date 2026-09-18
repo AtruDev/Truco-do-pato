@@ -5,8 +5,8 @@ Jogo de cartas estilo truco em C — trabalho de AED.
 ## Estrutura
 
 ```
-estruturas/ TADs pilha.h e fila.h da disciplina (usados sem alteração)
-include/   headers (.h) — contratos entre os módulos
+estruturas/ TADs pilha.h e fila.h
+include/   headers (.h) 
 src/       implementações (.c) e main.c
 Makefile
 ```
