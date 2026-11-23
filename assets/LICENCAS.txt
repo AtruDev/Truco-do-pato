@@ -6,7 +6,7 @@ fonte/DejaVuSans.ttf, fonte/DejaVuSans-Bold.ttf
     fonte/LICENSE-DejaVu.txt). https://dejavu-fonts.github.io
 
 sons/carta.wav, sons/embaralhar.wav, sons/truco.wav, sons/vitoria.wav
-    Sintetizados pelo grupo (ondas e ruido gerados por script).
+    Gerados por script (ondas e ruido sintetizados, com auxilio de IA).
     Dominio publico (CC0).
 
 Cartas, verso e logo do pato
