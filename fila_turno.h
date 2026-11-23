@@ -35,9 +35,16 @@ Jogador *proximo_jogador(FilaTurno *f);
  * Retorna 1 quando todos passaram (a vez voltou ao "mão"), senão 0. */
 int jogador_passou(FilaTurno *f);
 
-/* Fim da mão: o "mão" atual vai para o fim da roda e o próximo da mesa
- * vira o novo "mão". Zera a contagem de passadas para a nova mão. */
+/* Fim da mão: o "mão" desta mão vai para o fim da roda e o próximo da
+ * mesa vira o novo "mão". Zera a contagem de passadas para a nova mão.
+ * Funciona mesmo que fila_posicionar() tenha girado a roda no meio da mão. */
 void girar_mao(FilaTurno *f);
+
+/* Gira a roda até j ficar no início (é quem abre a próxima rodada, por
+ * exemplo quem venceu a anterior) e zera a contagem de passadas.
+ * Não muda quem é o "mão" da mão atual.
+ * Retorna 1 se deu certo, 0 se j não está na mesa. */
+int fila_posicionar(FilaTurno *f, Jogador *j);
 
 /* Devolve a memória da roda. */
 void liberar_fila(FilaTurno *f);

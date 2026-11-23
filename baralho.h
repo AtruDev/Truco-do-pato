@@ -64,4 +64,12 @@ int puxar_do_topo(Baralho *b, Carta *saida);
 /* Devolve a memória do baralho. */
 void liberar_baralho(Baralho *b);
 
+/* Nomes para exibição ("3", "Q", ... / "ouros", "paus", ...).
+ * Ficam aqui para todos os módulos usarem a mesma tabela. */
+const char *texto_valor(Valor v);
+const char *texto_naipe(Naipe n);
+
+/* Imprime a carta no formato "3 de paus" (sem quebra de linha). */
+void mostrar_carta(Carta c);
+
 #endif /* BARALHO_H */

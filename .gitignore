@@ -1,8 +1,17 @@
-# arquivos gerados pela compilação
+# Binários e objetos de compilação
 *.o
-*.d
+*.obj
 *.exe
-bar_do_pato
+*.out
+truco
+a.out
 
-# enunciado do professor (não publicar)
-Projeto-AED-*.pdf
+# Arquivos de dados gerados em tempo de execução
+caderneta.txt
+historico.txt
+
+# IDE / SO
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

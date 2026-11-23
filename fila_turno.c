@@ -19,6 +19,7 @@ struct FilaTurno {
     tp_fila fila;   /* cadeiras (0..3) na ordem da vez; início = da vez */
     Mesa *mesa;     /* para converter a cadeira no Jogador */
     int passaram;   /* quantos já passaram desde que o "mão" jogou */
+    int cadeira_mao; /* cadeira do "mão" desta mão (não muda entre rodadas) */
 };
 
 /* Tira o jogador da vez do início da fila e o põe no fim. */
@@ -28,6 +29,20 @@ static void mover_para_o_fim(FilaTurno *f)
 
     if (removeFila(&f->fila, &cadeira))
         insereFila(&f->fila, cadeira);
+}
+
+/* Gira a roda até a cadeira indicada ficar no início.
+ * Retorna 1 se achou, 0 se a cadeira não está na fila. */
+static int girar_ate(FilaTurno *f, int cadeira)
+{
+    int i, atual;
+
+    for (i = 0; i < NUM_JOGADORES; i++) {
+        if (peekFila(&f->fila, &atual) && atual == cadeira)
+            return 1;
+        mover_para_o_fim(f);
+    }
+    return 0;
 }
 
 /* Enfileira as cadeiras a partir do "mão".
@@ -46,6 +61,7 @@ FilaTurno *criar_fila(Mesa *m, int posicao_mao)
 
     f->mesa = m;
     f->passaram = 0;
+    f->cadeira_mao = posicao_mao;
     return f;
 }
 
@@ -77,12 +93,31 @@ int jogador_passou(FilaTurno *f)
     return 0;
 }
 
-/* Mesma operação de passar a vez, mas marcando o começo de uma mão
- * nova: o "mão" antigo vai para o fim e a contagem recomeça do zero. */
+/* Começo de uma mão nova: volta a roda para o "mão" desta mão (ela
+ * pode ter sido girada por fila_posicionar), manda ele para o fim e
+ * o próximo vira o novo "mão". A contagem recomeça do zero. */
 void girar_mao(FilaTurno *f)
 {
+    girar_ate(f, f->cadeira_mao);
     mover_para_o_fim(f);
+    peekFila(&f->fila, &f->cadeira_mao);
     f->passaram = 0;
+}
+
+/* Acha a cadeira do jogador na mesa e gira a roda até ela. */
+int fila_posicionar(FilaTurno *f, Jogador *j)
+{
+    int cadeira;
+
+    for (cadeira = 0; cadeira < NUM_JOGADORES; cadeira++)
+        if (f->mesa->posicoes[cadeira] == j)
+            break;
+
+    if (cadeira == NUM_JOGADORES || !girar_ate(f, cadeira))
+        return 0;
+
+    f->passaram = 0;
+    return 1;
 }
 
 void liberar_fila(FilaTurno *f)

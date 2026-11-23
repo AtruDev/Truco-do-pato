@@ -13,6 +13,7 @@
  * ser incluído neste arquivo (senão o linker acusa definição duplicada).
  * Por isso Baralho é opaco para os outros módulos.
  */
+#include <stdio.h>
 #include <stdlib.h>
 #include "baralho.h"
 #include "pilha.h"
@@ -109,4 +110,28 @@ int puxar_do_topo(Baralho *b, Carta *saida)
 void liberar_baralho(Baralho *b)
 {
     free(b);
+}
+
+/* Tabelas na mesma ordem dos enums Valor e Naipe. */
+static const char *const TEXTO_VALOR[NUM_VALORES] = {
+    "4", "5", "6", "7", "Q", "J", "K", "A", "2", "3"
+};
+
+static const char *const TEXTO_NAIPE[NUM_NAIPES] = {
+    "ouros", "espadas", "copas", "paus"
+};
+
+const char *texto_valor(Valor v)
+{
+    return ((unsigned) v < NUM_VALORES) ? TEXTO_VALOR[v] : "?";
+}
+
+const char *texto_naipe(Naipe n)
+{
+    return ((unsigned) n < NUM_NAIPES) ? TEXTO_NAIPE[n] : "?";
+}
+
+void mostrar_carta(Carta c)
+{
+    printf("%s de %s", texto_valor(c.valor), texto_naipe(c.naipe));
 }
