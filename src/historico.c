@@ -89,6 +89,11 @@ const NoHist *ultima_rodada(const Historico *h)
     return h != NULL ? h->fim : NULL;
 }
 
+const NoHist *primeira_rodada(const Historico *h)
+{
+    return h != NULL ? h->inicio : NULL;
+}
+
 /* Copia o nó inteiro e acerta o que não pode vir de fora: os ponteiros
  * para jogadores (que não existem numa partida antiga), os limites de
  * qtd e os terminadores dos nomes. Depois encadeia no fim. */

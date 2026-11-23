@@ -1,0 +1,22 @@
+Truco no Bar do Pato - versao 2 (grafica): licencas dos assets
+==============================================================
+
+fonte/DejaVuSans.ttf, fonte/DejaVuSans-Bold.ttf
+    DejaVu Fonts 2.37 - licenca livre (Bitstream Vera / Arev, ver
+    fonte/LICENSE-DejaVu.txt). https://dejavu-fonts.github.io
+
+sons/carta.wav, sons/embaralhar.wav, sons/truco.wav, sons/vitoria.wav
+    Gerados por script (ondas e ruido sintetizados, com auxilio de IA).
+    Dominio publico (CC0).
+
+Cartas, verso e logo do pato
+    Desenhados pelo proprio jogo (gui_base.c), com formas da raylib e
+    os naipes da fonte DejaVu. Nao dependem de arquivo.
+    Opcional: para usar o Kenney Playing Cards Pack (CC0,
+    https://kenney.nl/assets/playing-cards-pack), coloque em cartas/
+    as 40 imagens com o nome <valor>_<naipe>.png (ex.: Q_copas.png,
+    4_ouros.png, A_espadas.png, 3_paus.png) e verso.png. Se todas
+    existirem, o jogo usa as imagens no lugar das cartas desenhadas.
+
+Bibliotecas
+    raylib 6.0 (zlib) - https://github.com/raysan5/raylib

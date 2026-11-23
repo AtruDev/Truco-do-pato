@@ -143,13 +143,8 @@ int carregar_caderneta(Caderneta *c, const char *caminho)
 /* VAR em disco (historico.txt)                                        */
 /* ================================================================== */
 
-/* Resumo de uma partida para a listagem (só existe dentro deste .c). */
-typedef struct {
-    int id;
-    char data[TAM_DATA];
-    char nomes[NUM_JOGADORES][MAX_NOME];  /* ordem da mesa: D1, D2, D1, D2 */
-    int terminou, pontos_d1, pontos_d2;
-} ResumoPartida;
+/* (Versao 2: ResumoPartida passou para o arquivo.h, porque a tela de
+ * partidas antigas tambem usa.) */
 
 /* Lê uma linha com fgets e tira o '\n' (e o '\r' do Windows).
  * Linha maior que o buffer: descarta o resto e devolve a linha vazia,
@@ -322,18 +317,21 @@ static int achar_resumo(const ResumoPartida *v, int n, int id)
     return -1;
 }
 
-int listar_partidas_salvas(const char *caminho)
+/* Lê o arquivo uma vez e junta as partidas (linhas P, completadas pela
+ * linha F) num vetor que cresce com realloc, sem imprimir nada (a não
+ * ser falta de memória). Grava em *n quantas achou.
+ * Retorna o vetor (quem chama dá free) ou NULL se não achou nenhuma. */
+static ResumoPartida *juntar_partidas(const char *caminho, int *n_saida)
 {
     FILE *arq = fopen(caminho, "r");
     char linha[TAM_LINHA_HIST];
-    char dupla1[2 * MAX_NOME + 4], dupla2[2 * MAX_NOME + 4];
     ResumoPartida *v = NULL, *maior, r;
     int n = 0, cap = 0, i, id, p1, p2, campea;
 
+    *n_saida = 0;
     if (arq == NULL)
-        return 0;
+        return NULL;
 
-    /* 1ª etapa: junta as partidas num vetor que cresce conforme precisa */
     while (ler_linha(arq, linha, sizeof linha)) {
         if (linha[0] == 'P') {
             memset(&r, 0, sizeof r);
@@ -358,12 +356,43 @@ int listar_partidas_salvas(const char *caminho)
                 v[i].terminou = 1;
                 v[i].pontos_d1 = p1;
                 v[i].pontos_d2 = p2;
+                v[i].campea = (campea == 1 || campea == 2) ? campea : 0;
             }
         }
     }
     fclose(arq);
 
-    /* 2ª etapa: mostra. Dupla 1 = 1º e 3º nome; dupla 2 = 2º e 4º. */
+    if (n == 0) {
+        free(v);
+        return NULL;
+    }
+    *n_saida = n;
+    return v;
+}
+
+int ler_partidas_salvas(const char *caminho, ResumoPartida vet[], int max)
+{
+    ResumoPartida *v;
+    int n, i;
+
+    v = juntar_partidas(caminho, &n);
+    if (n > max)
+        n = max;
+    for (i = 0; i < n; i++)
+        vet[i] = v[i];
+    free(v);
+    return n < 0 ? 0 : n;
+}
+
+int listar_partidas_salvas(const char *caminho)
+{
+    char dupla1[2 * MAX_NOME + 4], dupla2[2 * MAX_NOME + 4];
+    ResumoPartida *v;
+    int n, i;
+
+    v = juntar_partidas(caminho, &n);
+
+    /* mostra. Dupla 1 = 1º e 3º nome; dupla 2 = 2º e 4º. */
     if (n > 0) {
         printf("\nPartidas salvas no Bar do Pato\n");
         printf("%2s  %-18s%-17s%-17s%s\n", "#", "Data", "Dupla 1", "Dupla 2",

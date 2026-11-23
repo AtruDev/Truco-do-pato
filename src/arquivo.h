@@ -36,8 +36,14 @@
 #include "caderneta.h"
 #include "historico.h"
 
+/* Versao 2: os testes compilam com -DARQUIVO_...=... para usar arquivos
+ * proprios e nunca mexer nos do bar. Sem o -D, valem estes nomes. */
+#ifndef ARQUIVO_CADERNETA
 #define ARQUIVO_CADERNETA "caderneta.txt"
+#endif
+#ifndef ARQUIVO_HISTORICO
 #define ARQUIVO_HISTORICO "historico.txt"
+#endif
 
 /* Grava a caderneta inteira em 'caminho', um fregues por linha,
  * em PRE-ORDEM. Escreve primeiro em '<caminho>.tmp' e so depois
@@ -67,8 +73,21 @@ int gravar_rodada(const char *caminho, int id, const NoHist *no);
 int gravar_fim_partida(const char *caminho, int id, int pontos_d1,
                        int pontos_d2, int campea);
 
+/* Resumo de uma partida do historico.txt (linha P + linha F, se houver). */
+typedef struct {
+    int id, terminou, pontos_d1, pontos_d2, campea; /* campea: 1, 2 ou 0 */
+    char data[17];                                  /* "AAAA-MM-DD HH:MM" */
+    char nomes[NUM_JOGADORES][MAX_NOME];            /* ordem da mesa: D1, D2, D1, D2 */
+} ResumoPartida;
+
+/* Versao 2 (grafica): os dados das partidas, sem imprimir. Grava em
+ * vet[] no maximo 'max' partidas, na ordem do arquivo.
+ * Retorna quantas gravou (0 se o arquivo nao existe). */
+int ler_partidas_salvas(const char *caminho, ResumoPartida vet[], int max);
+
 /* Mostra as partidas gravadas: numero, data, duplas e placar final
- * ou "interrompida". Retorna quantas partidas tem (0 = nao mostra nada). */
+ * ou "interrompida". Retorna quantas partidas tem (0 = nao mostra nada).
+ * Versao 2: usa a mesma leitura de ler_partidas_salvas. */
 int listar_partidas_salvas(const char *caminho);
 
 /* Monta um Historico novo com todas as rodadas da partida 'id'.
