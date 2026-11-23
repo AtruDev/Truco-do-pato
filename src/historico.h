@@ -70,6 +70,10 @@ int registrar_rodada(Historico *h, int mao, int rod, const Rodada *r,
  * Usado para gravar a rodada no arquivo. */
 const NoHist *ultima_rodada(const Historico *h);
 
+/* Versao 2 (grafica): primeiro no da lista, ou NULL se vazia. A tela do
+ * VAR anda pela lista com ->prox / ->ant a partir dele, sem imprimir. */
+const NoHist *primeira_rodada(const Historico *h);
+
 /* Poe no fim uma copia de 'dados' (numeros, cartas, nomes e eventos),
  * sem precisar de Jogador: usado ao carregar partida antiga.
  * rodada.quem fica NULL (exibir_no so usa os nomes copiados).

@@ -9,6 +9,12 @@ a.out
 # Arquivos de dados gerados em tempo de execução
 caderneta.txt
 historico.txt
+*.tmp
+
+# Versao 2: compilacao e testes
+build/
+raylib/
+teste_motor_*.txt
 
 # IDE / SO
 .vscode/
