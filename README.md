@@ -13,6 +13,14 @@ O projeto tem duas versões, que usam os mesmos módulos de regras:
 | **v2 · gráfica** | branch `main` (tag `v2-grafica-final`) | Janela com mouse e teclado, sons e animações ([raylib](https://www.raylib.com/)) | gcc + raylib **6.0** (Windows) |
 | **v1 · terminal** | tag `v1-terminal-final` | Menu de texto no terminal | Só o gcc |
 
+> ### 🎮 Só quer jogar? [Baixe aqui](https://github.com/AtruDev/Truco-do-pato/releases/latest)
+>
+> Na página da Release, baixe o **`TrucoBarDoPato-v2-windows.zip`**, clique com o botão direito →
+> **Extrair tudo** e dê dois cliques em `bar_do_pato.exe`. Não precisa instalar nada.
+> Quem prefere a versão de terminal pode baixar o `bar_do_pato-terminal-v1.exe`.
+>
+> Para compilar o código você mesmo, siga o passo a passo abaixo.
+
 ---
 
 ## Sumário
