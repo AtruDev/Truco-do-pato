@@ -21,3 +21,7 @@ teste_motor_*.txt
 .idea/
 Thumbs.db
 .DS_Store
+
+# Codigo-fonte da raylib baixado no passo 3 do README
+raylib-*/
+raylib-*.tar.gz
